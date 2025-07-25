@@ -5,9 +5,21 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="toyota1" class="com.model.Toyota">
-	<constructor-arg value="750000"></constructor-arg>
-	<constructor-arg ref="toyotaEngine"></constructor-arg>
+		<constructor-arg value="750000"></constructor-arg>
+		<constructor-arg ref="toyotaEngine"></constructor-arg>
 	</bean>
 	
-	<bean id="toyotaEngine" class="com.model.ToyotaEngine"></bean>
+	<bean id="Toyota2" class="com.model.Toyota">
+		<property name="price" value="5000000"></property>
+		<property name="engine" ref="toyotaEngine"></property>
+	</bean>
+	
+	<bean id="Toyota3" class="com.model.Toyota" autowire="byType"></bean>
+	
+	<bean id="Toyota4" class="com.model.Toyota" autowire="byName"></bean>
+	
+	<bean id="Engine" class="com.model.ToyotaEngine" primary="true"></bean>
+	
+	<bean id="toyotaEngine" class="com.model.ToyotaEngine" ></bean>
+	
 </beans>
