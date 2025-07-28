@@ -14,7 +14,7 @@ public class Kia {
 	@Qualifier("benzEngine")
 	private Engine engine;
 
-	public Kia(Engine engine) {
+	public Kia(@Qualifier("benzEngine")Engine engine) {
 		super();
 		this.engine = engine;
 	}
