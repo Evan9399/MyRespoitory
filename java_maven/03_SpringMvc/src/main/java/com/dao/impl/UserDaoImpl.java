@@ -74,7 +74,7 @@ public class UserDaoImpl implements UserDao{
 	    try (Session session = connectionService.getSession();) {
 			// 開啟交易/事務
 			Transaction transaction = session.beginTransaction();
-			
+
 			// Hibernate 6.0 以上
 			//delete 用 remove
 			session.remove(userEntity);
@@ -82,6 +82,35 @@ public class UserDaoImpl implements UserDao{
 			// 提交
 			transaction.commit();
 	    }
+	}
+
+	@Override
+	public List<UserEntity> findAll() {
+		try (Session session = connectionService.getSession();) {//先連線
+			//String sql = "select u from UserEntity u ";
+		    //Query<UserEntity> query = session.createQuery(sql, UserEntity.class);
+		    
+		    
+		    String sql = "select * from user ";//原生地SQL寫法
+		    Query<UserEntity> query = session.createNativeQuery(sql, UserEntity.class);//因為是原生SQL寫法，所以要加native
+		    List<UserEntity> userList = query.getResultList();
+		    return userList;
+		}
+		
+		
+	}
+
+	@Override
+	public UserEntity findById(Long id) {
+		try (Session session = connectionService.getSession();) {
+		    String sql = "select * from user u where u.id = :id2 ";
+		    Query<UserEntity> query = session.createNativeQuery(sql, UserEntity.class);
+		    query.setParameter("id2", id);
+		    List<UserEntity> userList = query.getResultList();
+		    System.out.println(userList.get(0).getId());
+		    
+			return userList.get(0);
+		}
 	}
 	
 	
