@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.entity.UserEntity;
 import com.service.UserService;
+import com.vo.User;
 import com.vo.UserVo;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -58,6 +60,19 @@ public class UesrController {
 			return "";
 		}
 		
+		@GetMapping("/toUserList3")
+		public ModelAndView userList3() {
+			List<UserEntity> userList = userService.findAllUser();
+//			model.addAttribute("userList", userList);
+
+			ModelAndView mv = new ModelAndView();
+			mv.addObject("userList", userList);
+			mv.setViewName("userList");
+			
+			return mv;
+		}
+		
+	
 		@GetMapping("/delete/{id}")
 		public String deleteUser(@PathVariable("id") Long id) {
 			System.out.println("@PathVariable id: " + id);
@@ -84,5 +99,12 @@ public class UesrController {
 			userService.upateUser(user);
 			return "redirect:/toUserList";
 			
+		}
+		
+		@GetMapping("/getSession")
+		public String getSession() {
+			User user = userService.getSessionUser();
+			System.out.println("Session :" + user.getUsername());
+			return "redirect:/toUserList";
 		}
 }

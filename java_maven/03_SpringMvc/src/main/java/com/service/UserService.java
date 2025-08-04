@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.dao.UserDao;
 import com.entity.UserEntity;
+import com.vo.User;
 import com.vo.UserVo;
 
 @Service
@@ -18,10 +19,15 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 	
+	@Autowired
+	private User userSession;
+	
 	public boolean checkLogin(String username, String password) {
 		// 呼叫 Dao/Repository
 		UserEntity user = userDao.findByUsernameAndPassword(username, password);
 		if (user != null) {
+			// 正常登入
+			userSession.setUsername(user.getUsername());
 			return true;
 		} else {
 			return false;
@@ -116,6 +122,9 @@ public class UserService {
 			}
 
 			userDao.updateUser(user);
+		}
+		public User getSessionUser() {
+			return userSession;
 		}
 		
 }

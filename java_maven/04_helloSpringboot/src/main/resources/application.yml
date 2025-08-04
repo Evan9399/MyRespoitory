@@ -1,0 +1,10 @@
+#spring.application.name=04_helloSpringboot
+#server.port=9090
+spring:
+  application:
+    name: 04_helloSpringboot
+server:
+  port: 9090
+logging:
+  level: 
+    com.course: trace
