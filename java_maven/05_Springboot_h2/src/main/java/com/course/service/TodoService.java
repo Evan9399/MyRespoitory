@@ -1,6 +1,7 @@
 package com.course.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,25 @@ public class TodoService {
 		dto.setDueDate(new Date());
 		dto.setStatus(3);
 		dto.setId(4);
-		todoDao.update(dto);
-		
+		todoDao.update(dto);	
+	}
+	
+	public void deleteById(Integer id) {
+		todoDao.delete(id);
+	}
+	
+	public List<TodoDto> findAllTodo() {
+		List<TodoDto> dtoList = todoDao.findAll();
+		for (TodoDto dto : dtoList) {
+			System.out.println(dto);
+		}
+		return dtoList;
+	}
+	
+	
+	public List<TodoDto> findByTitle(String title) {
+		List<TodoDto> dtoList = todoDao.findByTitle(title);
+
+		return dtoList;
 	}
 }

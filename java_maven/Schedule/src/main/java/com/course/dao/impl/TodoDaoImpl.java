@@ -1,4 +1,4 @@
-package com.course.Dao.Impl;
+package com.course.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.course.Dao.TodoDao;
+import com.course.dao.TodoDao;
 import com.course.model.TodoDto;
 
 @Repository
@@ -21,41 +21,39 @@ public class TodoDaoImpl implements TodoDao {
 	
 	@Override
 	public void add(TodoDto dto) {
-		String sql="insert into todo (title, duedate, status) values (?,?,?)";
+
+		String sql = "INSERT INTO TODO (TITLE, DUEDATE, STATUS) VALUES (?, ?, ?) ";
 		jdbcTemplate.update(sql, dto.getTitle(), dto.getDueDate(), dto.getStatus());
-		
 	}
 
 	@Override
 	public void update(TodoDto dto) {
-		String sql = "UPDATE TODO SET TITLE = ?, DUEDATE = ?, STATUS = ? WHERE ID = ?";
+		String sql = "UPDATE TODO SET TITLE = ?, DUEDATE = ?, STATUS = ? WHERE ID =　? ";
 		jdbcTemplate.update(sql, dto.getTitle(), dto.getDueDate(), dto.getStatus(), dto.getId());
-		
 		
 	}
 
 	@Override
-	public void delete(Integer id) {
-		String sql = "delete from TODO WHERE ID = ?";
+	public void delete(Long id) {
+		String sql = "DELETE FROM TODO WHERE ID =　? ";
 		jdbcTemplate.update(sql, id);
 		
 	}
 
 	@Override
 	public List<TodoDto> findAll() {
-		String sql="select * from TODO";
-		RowMapper<TodoDto> rowMapper =new RowMapper<>() {//rowMapper是interface 所以可以另外寫class繼承使用或是用匿名宣告
-
+		String sql = "SELECT * FROM TODO";
+		RowMapper<TodoDto> rowMapper = new RowMapper<>() {
 			@Override
 			public TodoDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 				TodoDto dto = new TodoDto();
-				dto.setId(rs.getInt("ID"));
+				dto.setId(rs.getLong("ID"));
 				dto.setTitle(rs.getString("TITLE"));
-				dto.setDueDate(rs.getDate("DUEDATE"));
+				dto.setDueDate(rs.getDate("DUE_DATE"));
 				dto.setStatus(rs.getInt("STATUS"));
+				dto.setMemo(rs.getString("MEMO"));
 				return dto;
 			}
-			
 		};
 		return jdbcTemplate.query(sql, rowMapper);
 	}
@@ -77,14 +75,14 @@ public class TodoDaoImpl implements TodoDao {
 		sb.append(" WHERE T.ID IS NOT NULL ");
 		if (!title.isBlank()) {
 			sb.append(" AND T.TITLE LIKE ? ");	
-			params.add("%" + title + "%");		
+			params.add("%" + title + "%");
 		}
 //		sb.append(" AND T.TITLE1 = ? ");
 //		sb.append(" AND T.TITLE2 = ? ");
 		
-		RowMapper<TodoDto> rowMapper = (rs, rowNum) -> {//lambda寫法
+		RowMapper<TodoDto> rowMapper = (rs, rowNum) -> {
 			TodoDto dto = new TodoDto();
-			dto.setId(rs.getInt("ID"));
+			dto.setId(rs.getLong("ID"));
 			dto.setTitle(rs.getString("TITLE"));
 			dto.setDueDate(rs.getDate("DUEDATE"));
 			dto.setStatus(rs.getInt("STATUS"));
