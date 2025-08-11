@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.course.model.TodoVo;
 import com.course.service.TodoService;
@@ -23,4 +27,34 @@ public class TodoController {
         return "index";
     }
     
+    @ModelAttribute("title")
+    public String title() {
+    	return "待辦事項222";
+//    	return "<script>alert('!!!!!!')</script>";//用在utext 會跳視窗
+    }
+    
+    @GetMapping("/toAddPage")
+    public String toAddPage(@ModelAttribute("todoObj") TodoVo todovo) {
+    	return "addTodoPage";
+    }
+    
+    @PostMapping("/todo")
+    public String todo(@ModelAttribute("todoObj") TodoVo todovo) {
+    	todoService.addTodo(todovo);
+    	return "redirect:/";
+    }
+    
+    @GetMapping("/delete/{id}")
+    public String delTodo(@PathVariable Long id) {
+    	todoService.deleteTodo(id);
+    	return "redirect:/";
+    }
+    
+    @GetMapping("/toUpdatePage/{id}")
+    public String toUpdatePage(@PathVariable Long id, Model model) {
+    	TodoVo vo = todoService.getTodoById(id);
+    	new ModelAndView();
+    	model.addAttribute("todoObj", vo);
+    	return "editTodoPage";
+    }
 }

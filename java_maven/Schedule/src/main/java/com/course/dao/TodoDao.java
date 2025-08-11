@@ -35,4 +35,6 @@ public interface TodoDao {
 	 * @return
 	 */
 	List<TodoDto> findByTitle(String title);
+	
+	TodoDto findById(Long id);
 }
