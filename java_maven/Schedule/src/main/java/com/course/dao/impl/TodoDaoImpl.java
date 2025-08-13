@@ -29,8 +29,8 @@ public class TodoDaoImpl implements TodoDao {
 
 	@Override
 	public void update(TodoDto dto) {
-		String sql = "UPDATE TODO SET TITLE = ?, DUE_DATE = ?, STATUS = ? WHERE ID =　? ";
-		jdbcTemplate.update(sql, dto.getTitle(), dto.getDueDate(), dto.getStatus(), dto.getId());
+		String sql = "UPDATE TODO SET TITLE = ?, DUE_DATE = ?, STATUS = ?, MEMO = ? WHERE ID = ? ";
+		jdbcTemplate.update(sql, dto.getTitle(), dto.getDueDate(), dto.getStatus(), dto.getMemo(),dto.getId());
 		
 	}
 
