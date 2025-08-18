@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.course.dao.TodoDao;
+import com.course.model.SearchCondition;
 import com.course.model.TodoDto;
 import com.course.model.TodoVo;
 
@@ -78,6 +79,22 @@ public class TodoService {
 			TodoDto dto = helper.convertToDto(todo);
 			todoDao.update(dto);
 			
+		}
+		
+		public List<TodoVo> findByTitle(String title) {
+			List<TodoDto> dtoList = todoDao.findByTitle(title);
+			List<TodoVo> voList  = dtoList.stream().map(d -> helper.convertToVo(d)).collect(Collectors.toList());
+			return voList;
+		}
+		
+		/**
+		 * 依條件搜尋
+		 * @param condition
+		 * @return
+		 */
+		public List<TodoVo> searchByCondition(SearchCondition condition) {
+			List<TodoDto> dtoList = todoDao.findByCondition(condition);
+			return dtoList.stream().map(dto -> helper.convertToVo(dto)).collect(Collectors.toList());
 		}
 }
 
