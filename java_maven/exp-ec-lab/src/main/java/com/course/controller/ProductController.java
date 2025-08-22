@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.course.dto.ProductDto;
+import com.course.entity.ProductEntity;
 import com.course.service.ProductService;
 import com.course.vo.ProductQueryParam;
 import com.course.vo.ProductVo;
@@ -32,12 +33,28 @@ public class ProductController {
 		return ResponseEntity.ok().body("OK");
 	}
 	
+	//回傳entity 使用JpaReacion會無限迴圈
+	@Operation(summary = "取得所有商品(回傳Entity)", tags = "商品")
+	@GetMapping("/products-entity")
+	public List<ProductEntity> getAllProductReturnEntity() {
+		return productService.getAllProductReturnEntity();
+	}
+	
+	
 	@Operation(summary = "取得所有商品", tags = "商品")
 	@GetMapping("/products")
 	public ResponseEntity<List<ProductVo>> getAllProduct() {
 		List<ProductVo> productList = productService.getAllProduct();
 		return ResponseEntity.ok().body(productList);
 	}
+	
+	@Operation(summary = "取得所有商品(從Price)", tags = "商品")
+	@GetMapping("/products-price")
+	public ResponseEntity<List<ProductVo>> getAllProductForPrice() {
+		List<ProductVo> productList = productService.getAllProductForPrice();
+		return ResponseEntity.ok().body(productList);
+	}
+	
 	
 	@Operation(summary = "依ID取得商品", tags = "商品")
 	@GetMapping("/product/{id}")
