@@ -21,6 +21,31 @@ public class ProductDto {
 	public ProductDto() {
 
 	}
+	public ProductDto(Long id,String code, String name, BigDecimal listPrice, BigDecimal salesPrice, String memo) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.name = name;
+		this.listPrice = listPrice;
+		this.salesPrice = salesPrice;
+		this.memo = memo;
+	}
+	public ProductDto(String code, String name, BigDecimal listPrice, BigDecimal salesPrice, String memo) {
+		super();
+		this.code = code;
+		this.name = name;
+		this.listPrice = listPrice;
+		this.salesPrice = salesPrice;
+		this.memo = memo;
+	}
+	
+	public ProductDto(String code, String name, BigDecimal listPrice, BigDecimal salesPrice) {
+		super();
+		this.code = code;
+		this.name = name;
+		this.listPrice = listPrice;
+		this.salesPrice = salesPrice;
+	}
 
 	public Long getId() {
 		return id;

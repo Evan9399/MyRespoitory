@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<head>
+    <title>My Sake</title>
+</head>
+<body>
+    <h1>User List</h1>
+    <form>
+    <input type="text" th:action="" value="" name="account">
+    </form>
+   	<ul>
+        <li th:each="user : ${users}">
+            <span th:text="${user.name}"></span> - <span th:text="${user.email}"></span>
+        </li>
+    </ul>
+</body>
+</html>
