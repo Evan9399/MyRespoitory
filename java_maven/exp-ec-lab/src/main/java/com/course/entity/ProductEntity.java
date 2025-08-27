@@ -21,7 +21,7 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.SqlResultSetMapping;
 import jakarta.persistence.Table;
 import lombok.Data;
-@SqlResultSetMapping(
+/*@SqlResultSetMapping(
 	    name = "ProductDtoMapping",
 	    classes = @ConstructorResult(
 	        targetClass = ProductDto.class,
@@ -35,7 +35,7 @@ import lombok.Data;
 	           
 	        }
 	    )
-	)
+	)*/
 	
 
 @Entity

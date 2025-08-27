@@ -46,6 +46,12 @@ public class ProductDto {
 		this.listPrice = listPrice;
 		this.salesPrice = salesPrice;
 	}
+	
+	public ProductDto(String code, String name) {
+		super();
+		this.code = code;
+		this.name = name;
+	}
 
 	public Long getId() {
 		return id;
