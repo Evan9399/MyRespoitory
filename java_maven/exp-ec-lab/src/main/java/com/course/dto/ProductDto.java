@@ -17,6 +17,8 @@ public class ProductDto {
 	private String memo;
 	
 	private String cname;
+	
+	private Long productId;
 
 	public ProductDto() {
 
@@ -107,6 +109,14 @@ public class ProductDto {
 
 	public void setCname(String cname) {
 		this.cname = cname;
+	}
+	
+	public Long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
 	}
 
 }

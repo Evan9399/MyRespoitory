@@ -27,4 +27,8 @@ public class MemberService {
 		return memberRepository.findAll();
 	}
 	
+	public MemberEntity updateMember(MemberEntity entity) {
+		return memberRepository.save(entity);
+	}
+	
 }
