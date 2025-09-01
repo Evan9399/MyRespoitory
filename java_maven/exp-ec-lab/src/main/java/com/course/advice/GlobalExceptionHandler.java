@@ -14,7 +14,7 @@ import com.course.exception.ActionException;
 import com.course.model.ApiResponse;
 
 
-@RestControllerAdvice
+//@RestControllerAdvice
 public class GlobalExceptionHandler {
 	
 	Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);

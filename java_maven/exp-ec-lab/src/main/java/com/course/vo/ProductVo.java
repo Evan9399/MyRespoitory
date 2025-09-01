@@ -4,8 +4,11 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 
 public class ProductVo {
+	
+	private Long id;
 	@NotBlank
 	private String code;
 	
@@ -65,6 +68,14 @@ public class ProductVo {
 
 	public void setCategories(List<String> categories) {
 		this.categories = categories;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 

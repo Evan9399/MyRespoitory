@@ -73,5 +73,7 @@ public interface ProductService {
 	 * @return
 	 */
 	List<ProductVo> getAllProductQuery();
+	
+	ProductVo getProductByCodeXml(String code);
 
 }

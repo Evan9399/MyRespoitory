@@ -111,4 +111,11 @@ public class ProductController {
 
 	}
 	
+	@Operation(summary = "依Code取得商品", tags = "XML")
+	@GetMapping("/product-code/{code}")
+	public ResponseEntity<ProductVo> getProductByCode(@PathVariable String code) {
+		ProductVo product = productService.getProductByCodeXml(code);
+		return ResponseEntity.ok().body(product);
+	}
+	
 }
