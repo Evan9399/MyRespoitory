@@ -75,5 +75,7 @@ public interface ProductService {
 	List<ProductVo> getAllProductQuery();
 	
 	ProductVo getProductByCodeXml(String code);
+	
+	void updateProductXml(ProductVo vo);
 
 }
